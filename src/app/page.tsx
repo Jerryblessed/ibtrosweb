@@ -5,6 +5,23 @@ import { motion } from "framer-motion";
 
 const HomePage = () => {
   const [showContact, setShowContact] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Compose mailto link to open user's email client
+    const subject = encodeURIComponent(`Contact from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    );
+    window.location.href = `mailto:ibtros7@gmail.com?subject=${subject}&body=${body}`;
+    setShowContact(false);
+    setName("");
+    setEmail("");
+    setMessage("");
+  };
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
@@ -22,29 +39,38 @@ const HomePage = () => {
         <div className="fixed inset-0 z-30 flex items-center justify-center bg-black/50">
           <div className="bg-white rounded-lg shadow-lg w-11/12 max-w-md p-6">
             <h2 className="text-xl font-bold mb-4">Contact Us</h2>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-medium">Name</label>
                 <input
                   type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="mt-1 block w-full border border-gray-300 rounded p-2"
                   placeholder="Your name"
+                  required
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium">Email</label>
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="mt-1 block w-full border border-gray-300 rounded p-2"
                   placeholder="your@example.com"
+                  required
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium">Message</label>
                 <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="mt-1 block w-full border border-gray-300 rounded p-2"
                   rows={4}
                   placeholder="How can we help?"
+                  required
                 />
               </div>
               <div className="flex justify-end space-x-2">
@@ -59,7 +85,7 @@ const HomePage = () => {
                   type="submit"
                   className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
-                  Send
+                  Send Email
                 </button>
               </div>
             </form>
@@ -67,7 +93,7 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Fullscreen Vimeo Video Header */}
+      {/* Fullscreen Video Header with Fallback */}
       <div className="absolute inset-0 overflow-hidden bg-[url('/ibtros.png')] bg-cover bg-center">
         <iframe
           src="https://player.vimeo.com/video/1082157353?autoplay=1&muted=1&loop=1&background=1"
@@ -81,10 +107,10 @@ const HomePage = () => {
         {/* Overlayed Header Content */}
         <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 bg-black/40">
           <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
-            
+            Institute-Based Shuttle System
           </h1>
           <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
-            
+            Revolutionizing smart transport for schools and organizations
           </p>
           <a
             href="https://t.me/IBmeal_bot"
@@ -166,8 +192,8 @@ const HomePage = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold mb-2">Contact Us</h3>
-            <p className="text-sm text-gray-700">Email: info@ibshuttle.org</p>
-            <p className="text-sm text-gray-700">Phone: +234 800 000 0000</p>
+            <p className="text-sm text-gray-700">Email: ibtros7@gmail.com</p>
+            <p className="text-sm text-gray-700">Phone: +234 9033528869</p>
             <p className="text-sm text-gray-700">Telegram: @IBmeal_bot</p>
           </div>
         </footer>
