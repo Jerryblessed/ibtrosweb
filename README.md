@@ -40,7 +40,7 @@ A **Telegram-based AI shuttle booking** platform (this repo) and the source code
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourorg/ibshuttle-web.git
+   git clone https://github.com/Jerryblessed/ibtrosweb.git
    cd ibshuttle-web
    ```
 
